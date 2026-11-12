@@ -1,0 +1,9 @@
+project: savantenvs/FTL
+target: fuzz_dhcp_leases
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_dhcp_leases/testsuite
+cmds:
+  - cmd: /mayhem/fuzz_dhcp_leases
+    libfuzzer: true
+    timeout: 10

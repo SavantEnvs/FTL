@@ -1,0 +1,19 @@
+title = "FTL"
+[dns]
+upstreams = [ "127.0.0.1#5555", "9.9.9.9" ]
+CNAMEdeepInspect = true
+[dhcp]
+active = false
+start = "192.168.0.10"
+leaseTime = "24h"
+[webserver.api]
+max_sessions = 16
+excludeClients = ["^192\\.168\\.1\\..*$"]
+[[array.of.tables]]
+name = "x"
+when = 1979-05-27T07:32:00-08:00
+float = -3.14e+2
+hex = 0xDEADbeef
+str = """multi
+line"""
+lit = 'C:\\path'

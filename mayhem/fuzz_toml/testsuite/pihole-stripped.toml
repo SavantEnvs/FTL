@@ -1,0 +1,211 @@
+[dns]
+  upstreams = [
+    "127.0.0.1#5555"
+  ] ### CHANGED, default = []
+  CNAMEdeepInspect = true
+  blockESNI = true
+  EDNS0ECS = true
+  ignoreLocalhost = false
+  showDNSSEC = true
+  analyzeOnlyAandAAAA = false
+  piholePTR = "PI.HOLE"
+  replyWhenBusy = "ALLOW"
+  blockTTL = 2
+  hosts = [
+    "1.1.1.1 abc-custom.com def-custom.de",
+    "2.2.2.2 äste.com steä.com"
+  ] ### CHANGED, default = []
+  domainNeeded = false
+  expandHosts = false
+  bogusPriv = true
+  dnssec = true ### CHANGED, default = false
+  interface = ""
+  hostRecord = ""
+  listeningMode = "LOCAL"
+  queryLogging = true
+  cnameRecords = [
+    "brücke.com,äste.com,2",
+    "pihole.mydomain.net,pi.hole"
+  ] ### CHANGED, default = []
+  port = 53
+  localise = true
+  revServers = []
+  [dns.domain]
+    name = "lan"
+    local = true
+  [dns.cache]
+    size = 10000
+    optimizer = 3600
+    upstreamBlockedTTL = 86400
+    rrtype = "ANY"
+  [dns.blocking]
+    active = true
+    mode = "NULL"
+    edns = "TEXT"
+  [dns.specialDomains]
+    mozillaCanary = true
+    iCloudPrivateRelay = true
+    designatedResolver = true
+    [dns.reply.host]
+      force4 = false
+      IPv4 = ""
+      force6 = false
+      IPv6 = ""
+    [dns.reply.blocking]
+      force4 = true ### CHANGED, default = false
+      IPv4 = "10.100.0.11" ### CHANGED, default = ""
+      force6 = true ### CHANGED, default = false
+      IPv6 = "fe80::11" ### CHANGED, default = ""
+  [dns.rateLimit]
+    count = 0 ### CHANGED, default = 1000
+    interval = 0 ### CHANGED, default = 60
+[dhcp]
+  active = false
+  start = ""
+  end = ""
+  router = ""
+  netmask = ""
+  leaseTime = ""
+  ipv6 = false
+  rapidCommit = false
+  multiDNS = false
+  logging = false
+  ignoreUnknownClients = false
+  hosts = []
+  [ntp.ipv4]
+    active = true
+    address = "127.0.0.1" ### CHANGED, default = ""
+  [ntp.ipv6]
+    active = true
+    address = ""
+  [ntp.sync]
+    active = true
+    server = "pool.ntp.org"
+    interval = 3600
+    count = 8
+    [ntp.sync.rtc]
+      set = false
+      device = ""
+      utc = true
+[resolver]
+  resolveIPv4 = false ### CHANGED, default = true
+  resolveIPv6 = false ### CHANGED, default = true
+  macNames = true
+  networkNames = false ### CHANGED, default = true
+  refreshNames = "NONE" ### CHANGED, default = "IPV4_ONLY"
+[database]
+  DBimport = true
+  maxDBdays = 91
+  DBinterval = 60
+  useWAL = true
+  forceDisk = false
+  [database.network]
+    parseARPcache = true
+    expire = 91
+[webserver]
+  domain = "pi.hole"
+  acl = ""
+  port = "80o,443os,[::]:80o,[::]:443os"
+  threads = 50
+  headers = [
+    "X-DNS-Prefetch-Control: off",
+    "Content-Security-Policy: default-src 'none'; connect-src 'self'; font-src 'self'; frame-ancestors 'none'; img-src 'self'; manifest-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; form-action 'self'",
+    "X-Frame-Options: DENY",
+    "X-XSS-Protection: 0",
+    "X-Content-Type-Options: nosniff",
+    "Referrer-Policy: strict-origin-when-cross-origin"
+  ]
+  serve_all = false
+  advancedOpts = []
+  [webserver.session]
+    timeout = 300 ### CHANGED, default = 1800
+    restore = true
+  [webserver.tls]
+    cert = "/etc/pihole/test.pem" ### CHANGED, default = "/etc/pihole/tls.pem"
+    validity = 47
+  [webserver.paths]
+    webroot = "/var/www/html"
+    webhome = "/admin/"
+    prefix = ""
+  [webserver.interface]
+    boxed = true
+    theme = "default-auto"
+  [webserver.api]
+    max_sessions = 16
+    prettyJSON = false
+    pwhash = ""
+    totp_secret = ""
+    app_pwhash = ""
+    app_sudo = false
+    cli_pw = true
+    excludeClients = [
+      "^1\\.2\\.3\\.4$"
+    ] ### CHANGED, default = []
+    excludeDomains = []
+    maxHistory = 86400
+    maxClients = 10
+    client_history_global_max = true
+    allow_destructive = true
+    [webserver.api.temp]
+      limit = 60.000000
+      unit = "C"
+[files]
+  database = "/etc/pihole/pihole-FTL.db"
+  tmp_db = "/etc/pihole/pihole-tmp.db"
+  gravity = "/etc/pihole/gravity.db"
+  gravity_tmp = "/tmp"
+  macvendor = "/etc/pihole/macvendor.db"
+  pcap = ""
+  [files.log]
+    ftl = "/var/log/pihole/FTL.log"
+    dnsmasq = "/var/log/pihole/pihole.log"
+    webserver = "/var/log/pihole/webserver.log"
+[misc]
+  privacylevel = 0
+  delay_startup = 0
+  nice = -11 ### CHANGED (env), default = -10
+  addr2line = true
+  etc_dnsmasq_d = true ### CHANGED, default = false
+  dnsmasq_lines = []
+  extraLogging = true ### CHANGED, default = false
+  readOnly = false
+  normalizeCPU = true
+  hide_dnsmasq_warn = false
+  hide_connection_error = false
+  [misc.check]
+    load = false ### CHANGED, default = true
+    shmem = 91 ### CHANGED (env), default = 90
+    disk = 0 ### CHANGED, default = 90
+[debug]
+  database = true ### CHANGED, default = false
+  networking = true ### CHANGED, default = false
+  locks = true ### CHANGED, default = false
+  queries = true ### CHANGED, default = false
+  flags = true ### CHANGED, default = false
+  shmem = true ### CHANGED, default = false
+  gc = true ### CHANGED, default = false
+  arp = true ### CHANGED, default = false
+  regex = true ### CHANGED, default = false
+  api = true ### CHANGED (env), default = false
+  tls = true ### CHANGED, default = false
+  overtime = true ### CHANGED, default = false
+  status = true ### CHANGED, default = false
+  caps = true ### CHANGED, default = false
+  dnssec = true ### CHANGED, default = false
+  vectors = true ### CHANGED, default = false
+  resolver = true ### CHANGED, default = false
+  edns0 = true ### CHANGED, default = false
+  clients = true ### CHANGED, default = false
+  aliasclients = true ### CHANGED, default = false
+  events = true ### CHANGED, default = false
+  helper = true ### CHANGED, default = false
+  config = true ### CHANGED, default = false
+  inotify = true ### CHANGED, default = false
+  webserver = true ### CHANGED, default = false
+  extra = true ### CHANGED, default = false
+  reserved = true ### CHANGED, default = false
+  ntp = true ### CHANGED, default = false
+  netlink = true ### CHANGED, default = false
+  timing = true ### CHANGED, default = false
+  performance = true ### CHANGED, default = false
+  all = true ### CHANGED, default = false

@@ -1,0 +1,10 @@
+project: savantenvs/FTL
+target: fuzz_dns_packet
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_dns_packet/testsuite
+cmds:
+  - cmd: /mayhem/fuzz_dns_packet
+    libfuzzer: true
+    timeout: 10
+    dictionary: /mayhem/mayhem/fuzz_dns_packet/fuzz_dns_packet.dict

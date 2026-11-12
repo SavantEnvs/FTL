@@ -1,0 +1,17 @@
+# Title: Test list
+127.0.0.1 localhost
+::1 localhost ip6-localhost
+0.0.0.0 ads.example.com tracker.example.net
+0.0.0.0 xn--bcher-kva.example
+192.168.1.1	bad_domain.example
+example.org.
+EXAMPLE.COM
+! ABP comment
+[Adblock Plus 2.0]
+||ads.example.org^
+||xn--bcher-kva.de^
+@@||allowed.example.com^
+example.com##.banner
+bad domain with spaces
+-leading-hyphen.example
+trailing-hyphen-.example

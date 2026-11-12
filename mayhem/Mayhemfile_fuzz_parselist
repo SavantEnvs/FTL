@@ -1,0 +1,10 @@
+project: savantenvs/FTL
+target: fuzz_parselist
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/fuzz_parselist/testsuite
+cmds:
+  - cmd: /mayhem/fuzz_parselist
+    libfuzzer: true
+    timeout: 10
+    dictionary: /mayhem/mayhem/fuzz_parselist/fuzz_parselist.dict

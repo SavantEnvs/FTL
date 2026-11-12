@@ -1,0 +1,9 @@
+# Keep the full repo (incl. .git, which the grader uses); drop only local build output.
+cmake/
+cmake_ci/
+build/
+*.o
+*.a
+.DS_Store
+*.swp
+*~
